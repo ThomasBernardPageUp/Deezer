@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Deezer.Views.ResultPage">
+    <StackLayout Padding="5">
+
+
+        <StackLayout Padding="5">
+            <Label Text="Artists :" FontSize="25"></Label>
+            <CollectionView ItemsSource="{Binding Artists}" x:Name="list1" HeightRequest="300">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Orientation="Horizontal" HeightRequest="100" Margin="2">
+                            <Image Source="{Binding Picture}" WidthRequest="100"></Image>
+                            <Label Text="{Binding Name}" VerticalOptions="Center" FontSize="20"></Label>
+
+                            <StackLayout.GestureRecognizers>
+                                   <TapGestureRecognizer Command="{Binding BindingContext.CmdArtist, Source={x:Reference list1}}" CommandParameter="{Binding Id}"></TapGestureRecognizer>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+
+        <StackLayout Padding="5">
+            <Label Text="Albums :" FontSize="25"></Label>
+            <CollectionView ItemsSource="{Binding Albums}" x:Name="list2" HeightRequest="300">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Orientation="Horizontal" HeightRequest="100" Margin="2">
+                            <Image Source="{Binding Cover}" WidthRequest="100"></Image>
+                            <Label Text="{Binding Title}" VerticalOptions="Center" FontSize="20"></Label>
+
+                            <StackLayout.GestureRecognizers>
+                                   <TapGestureRecognizer Command="{Binding BindingContext.CmdAlbum, Source={x:Reference list2}}" CommandParameter="{Binding Id}"></TapGestureRecognizer>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+
+        <StackLayout Padding="5">
+            <Label Text="Tracks :" FontSize="25"></Label>
+            <CollectionView ItemsSource="{Binding Tracks}" x:Name="list3" HeightRequest="300">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Orientation="Horizontal" HeightRequest="100" Margin="2">
+                            <Image Source="{Binding Album.Cover}" WidthRequest="100"></Image>
+                            <Label Text="{Binding Title}" VerticalOptions="Center" FontSize="20"></Label>
+
+                            <StackLayout.GestureRecognizers>
+                                   <TapGestureRecognizer Command="{Binding BindingContext.CmdTrack, Source={x:Reference list3}}" CommandParameter="{Binding .}"></TapGestureRecognizer>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+
+    </StackLayout>
+</ContentPage>

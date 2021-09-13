@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Deezer.Views.AlbumPage">
+    <StackLayout>
+        <Image Source="{Binding Album.Cover}" HeightRequest="250"></Image>
+        <Label Text="{Binding Album.Title}" FontSize="35" HorizontalOptions="Center"></Label>
+        <Label Text="{Binding Album.Artist.Name}" HorizontalOptions="Center" TextColor="Gray">
+            <Label.GestureRecognizers>
+                  <TapGestureRecognizer Command="{Binding BindingContext.CmdArtist, Source={x:Reference list}}" CommandParameter="{Binding Album.Artist.Id}"></TapGestureRecognizer>
+            </Label.GestureRecognizers>
+        </Label>
+
+
+        <StackLayout Orientation="Horizontal" BackgroundColor="DarkGray">
+            <Button Command="{Binding CmdPlayAlbum}" HorizontalOptions="EndAndExpand" WidthRequest="50" HeightRequest="50" Margin="20, 10" ImageSource="http://iconsetc.com/icons-watermarks/flat-rounded-square-white-on-black/raphael/raphael_arrow-shuffle/raphael_arrow-shuffle_flat-rounded-square-white-on-black_512x512.png"></Button>
+        </StackLayout>
+
+        <CollectionView ItemsSource="{Binding Album.TracksInfo.Tracks}" x:Name="list">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame>
+                        <StackLayout Orientation="Horizontal" HeightRequest="80">
+                             <Label Text="{Binding Title}" VerticalTextAlignment="Center" HorizontalOptions="StartAndExpand" FontSize="25" MaxLines="1" Margin="0, 0, 20, 0">
+                             </Label>
+
+                            <Image Source="https://static.vecteezy.com/system/resources/previews/001/186/943/non_2x/green-play-button-png.png">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding BindingContext.CmdPlayTrack, Source={x:Reference list}}" CommandParameter="{Binding .}"></TapGestureRecognizer>
+                                </Image.GestureRecognizers>
+                            </Image> 
+                        </StackLayout>
+                    </Frame>
+                    
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </StackLayout>
+</ContentPage>
