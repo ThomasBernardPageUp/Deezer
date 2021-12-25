@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Deezer.Views.ArtistPage">
+    <StackLayout>
+        <Image Source="{Binding Artist.Picture}" HeightRequest="200"></Image>
+        <Label Text="{Binding Artist.Name}" FontSize="30" HorizontalOptions="Center"></Label>
+
+        
+        <Label Text="All albums :" FontSize="22" TextDecorations="Underline"></Label>
+        <CollectionView ItemsSource="{Binding Artist.RootAlbum.Albums}" x:Name="list">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Orientation="Horizontal" HeightRequest="100">
+                        <Image Source="{Binding Cover}" WidthRequest="100"></Image>
+                        <Label Text="{Binding Title}" VerticalOptions="Center" FontSize="25"></Label>
+
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding BindingContext.CmdAlbum, Source={x:Reference list}}" CommandParameter="{Binding Id}"></TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                    
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <StackLayout>
+            <Label></Label>
+        </StackLayout>
+
+
+    </StackLayout>
+</ContentPage>

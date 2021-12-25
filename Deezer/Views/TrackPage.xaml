@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:converters="clr-namespace:Deezer.Converters"
+             ios:Page.ModalPresentationStyle="FormSheet"
+             x:Class="Deezer.Views.TrackPage"
+             >
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:SecToMinConverter x:Key="SecToMinConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="CenterAndExpand" Margin="15">
+            <Image Source="{Binding Track.Album.Cover}" HeightRequest="300"></Image>
+            <Label Text="{Binding Track.Title}" FontSize="30"></Label>
+            <Label Text="{Binding Track.Album.Artist.Name}"></Label>
+
+            <Slider Value="{Binding CurrentDuration}" Maximum="{Binding Track.Duration}" IsEnabled="False"></Slider>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="{Binding CurrentDuration, Converter={x:StaticResource Key=SecToMinConverter}}"></Label>
+                <Label Text="{Binding Track.Duration, Converter={x:StaticResource Key=SecToMinConverter}}" HorizontalOptions="EndAndExpand"></Label>
+
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Button WidthRequest="50" ImageSource="https://cdn0.iconfinder.com/data/icons/player-controls/512/10sec_backward-512.png" Command="{Binding CmdPreview}" HorizontalOptions="StartAndExpand"></Button>
+                <Button Command="{Binding CmdPause}" WidthRequest="100" ImageSource="https://cdn-icons-png.flaticon.com/512/27/27185.png" HorizontalOptions="CenterAndExpand"></Button>
+                <Button WidthRequest="50" Command="{Binding CmdNext}" HorizontalOptions="EndAndExpand" ImageSource="https://cdn0.iconfinder.com/data/icons/player-controls/512/10sec_forward-512.png"></Button>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal">
+                <Button Command="{Binding CmdPreviousTrack}" Text="Prev" HorizontalOptions="StartAndExpand" Rotation="180" ImageSource="https://cdn-icons-png.flaticon.com/512/254/254428.png" WidthRequest="50" HeightRequest="50"></Button>
+                <Button Command="{Binding CmdNextTrack}" Text="Next" HorizontalOptions="EndAndExpand" ImageSource="https://cdn-icons-png.flaticon.com/512/254/254428.png" WidthRequest="50" HeightRequest="50"></Button>
+
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
